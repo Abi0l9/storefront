@@ -17,7 +17,7 @@ services:
       - key: LOG_TO_FILE
         value: false
       - key: CLIENT_URL
-        sync: false
+        value: https://store-frontend-a2i5.onrender.com
       - key: MONGO_URI
         sync: false
       - key: JWT_SECRET
@@ -37,7 +37,7 @@ services:
     staticPublishPath: dist
     envVars:
       - key: VITE_API_URL
-        sync: false
+        value: https://store-backend-qlr4.onrender.com/api
     routes:
       - type: rewrite
         source: /*
