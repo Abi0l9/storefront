@@ -1,3 +1,4 @@
+import { Eye, EyeOff } from 'lucide-react';
 import { FormEvent, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { buttons, fields, panel } from '../lib/styles';
@@ -8,6 +9,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const [username, setUsername] = useState('admin');
   const [password, setPassword] = useState('password123');
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
@@ -42,12 +44,21 @@ export default function LoginPage() {
         </label>
         <label className="grid gap-2 font-bold text-slate-600">
           Password
-          <input
-            className={fields}
-            type="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-          />
+          <div className="relative">
+            <input
+              className={`${fields} pr-12`}
+              type={showPassword ? 'text' : 'password'}
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+            />
+            <button
+              className="absolute right-2 top-1/2 -translate-y-1/2 rounded-md p-2 text-slate-500"
+              onClick={() => setShowPassword((current) => !current)}
+              type="button"
+            >
+              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+            </button>
+          </div>
         </label>
         <button className={buttons.primary} disabled={submitting} type="submit">
           {submitting ? 'Signing in...' : 'Sign in'}
